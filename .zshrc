@@ -127,18 +127,8 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-export THM_SRC_ROOT=/Users/francoiscampbell/Software/THM
-
-# tabtab source for serverless package
-# uninstall by removing these lines or running `tabtab uninstall serverless`
-[[ -f /Users/francoiscampbell/Software/fe-marketplace/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/francoiscampbell/Software/fe-marketplace/node_modules/tabtab/.completions/serverless.zsh
-# tabtab source for sls package
-# uninstall by removing these lines or running `tabtab uninstall sls`
-[[ -f /Users/francoiscampbell/Software/fe-marketplace/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/francoiscampbell/Software/fe-marketplace/node_modules/tabtab/.completions/sls.zsh
 export YVM_DIR=/Users/francoiscampbell/.yvm
 source /usr/local/bin/yvm
-
-alias t=tophat
 
 eval "$(pyenv init -)"
 # BEGIN ANSIBLE MANAGED BLOCK
@@ -158,17 +148,49 @@ mkvar() {
     rm Makefile.tmp
   fi
 }
-# BEGIN thsshprod MANAGED BLOCK
-function thsshprod {
-  echo "Requesting, signing, and getting a production ssh certificate"
-  req="$(thssh prod | grep 'Certificate request id:' | awk '{print $4}')" && \
-  echo "${req}" && \
-  ssh-cert-authority sign --environment prod $req && \
-  ssh-cert-authority get --environment prod $req
-}
-# END thsshprod MANAGED BLOCK
 # BEGIN pyenv MANAGED BLOCK
 export PYENV_ROOT=~/.pyenv
 export PATH=$PYENV_ROOT/bin:$PATH
 eval "$(pyenv init -)"
 # END pyenv MANAGED BLOCK
+
+sshi () {
+  ssh -i ~/.ssh/key201712 ubuntu@$1
+}
+
+function ssht {
+  sshi $(python -c '
+import sys
+
+import boto3
+
+
+if len(sys.argv) < 3:
+  print "Usage: sshi <cluster> <task id>"
+  sys.exit(1)
+
+cluster = sys.argv[1]
+task_id = sys.argv[2]
+
+ecs = boto3.client("ecs")
+ec2 = boto3.client("ec2")
+
+ecs_instance_arn = ecs.describe_tasks(
+  cluster=cluster,
+  tasks=[task_id],
+)["tasks"][0]["containerInstanceArn"]
+
+ec2_instance_id = ecs.describe_container_instances(
+  cluster=cluster,
+  containerInstances=[ecs_instance_arn],
+)["containerInstances"][0]["ec2InstanceId"]
+
+ec2_instance_ip = ec2.describe_instances(
+  InstanceIds=[ec2_instance_id],
+)["Reservations"][0]["Instances"][0]["PrivateIpAddress"]
+
+print ec2_instance_ip
+  ' $1 $2)
+}
+
+alias gbc="git remote prune origin && (git branch -vv | grep 'origin/.*: gone]' | awk '{print $1}' | xargs git branch -D)"
