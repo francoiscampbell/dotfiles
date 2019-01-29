@@ -4,23 +4,23 @@
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/francoiscampbell/.oh-my-zsh"
 
-# Set name of the theme to load. Optionally, if you set this to "random"
-# it'll load a random theme each time that oh-my-zsh is loaded.
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="agnoster"
 
-# Set list of themes to load
-# Setting this variable when ZSH_THEME=random
-# cause zsh load theme from this variable instead of
-# looking in ~/.oh-my-zsh/themes/
-# An empty array have no effect
+# Set list of themes to pick from when loading at random
+# Setting this variable when ZSH_THEME=random will cause zsh to load
+# a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
+# If set to an empty array, this variable will have no effect.
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
+# Uncomment the following line to use hyphen-insensitive completion.
+# Case-sensitive completion must be off. _ and - will be interchangeable.
 # HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
@@ -48,20 +48,23 @@ ZSH_THEME="agnoster"
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# You can set one of the optional three formats:
+# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# or set a custom format using the strftime function format specifications,
+# see 'man strftime' for details.
 # HIST_STAMPS="mm/dd/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Which plugins would you like to load?
+# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
   docker
-  zsh-syntax-highlighting
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -95,6 +98,12 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+source ~/.bash_profile
+
+alias sz='subl ~/.zshrc'
+
 prompt_context() {
   
 }
@@ -118,25 +127,14 @@ rprompt_segment() {
 }
 
 rprompt_dir () {
-	RPROMPT=$(rprompt_segment blue black '%1~ ')
+  RPROMPT=$(rprompt_segment blue black '%1~ ')
 }
 
+autoload -U add-zsh-hook
 add-zsh-hook precmd rprompt_dir
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
 export YVM_DIR=/Users/francoiscampbell/.yvm
-source /usr/local/bin/yvm
-
-eval "$(pyenv init -)"
-# BEGIN ANSIBLE MANAGED BLOCK
-export PYENV_ROOT=~/.pyenv
-export PATH=$PYENV_ROOT/bin:$PATH
-eval "$(pyenv init -)"
-# END ANSIBLE MANAGED BLOCK
-eval $(thefuck --alias)
+[ -r $YVM_DIR/yvm.sh ] && source $YVM_DIR/yvm.sh
 
 mkvar() {
   if [ ! -e Makefile ]; then
@@ -148,49 +146,15 @@ mkvar() {
     rm Makefile.tmp
   fi
 }
-# BEGIN pyenv MANAGED BLOCK
-export PYENV_ROOT=~/.pyenv
-export PATH=$PYENV_ROOT/bin:$PATH
-eval "$(pyenv init -)"
-# END pyenv MANAGED BLOCK
-
-sshi () {
-  ssh -i ~/.ssh/key201712 ubuntu@$1
-}
-
-function ssht {
-  sshi $(python -c '
-import sys
-
-import boto3
-
-
-if len(sys.argv) < 3:
-  print "Usage: sshi <cluster> <task id>"
-  sys.exit(1)
-
-cluster = sys.argv[1]
-task_id = sys.argv[2]
-
-ecs = boto3.client("ecs")
-ec2 = boto3.client("ec2")
-
-ecs_instance_arn = ecs.describe_tasks(
-  cluster=cluster,
-  tasks=[task_id],
-)["tasks"][0]["containerInstanceArn"]
-
-ec2_instance_id = ecs.describe_container_instances(
-  cluster=cluster,
-  containerInstances=[ecs_instance_arn],
-)["containerInstances"][0]["ec2InstanceId"]
-
-ec2_instance_ip = ec2.describe_instances(
-  InstanceIds=[ec2_instance_id],
-)["Reservations"][0]["Instances"][0]["PrivateIpAddress"]
-
-print ec2_instance_ip
-  ' $1 $2)
-}
 
 alias gbc="git remote prune origin && (git branch -vv | grep 'origin/.*: gone]' | awk '{print $1}' | xargs git branch -D)"
+
+alias ls='exa'
+alias l='exa -la'
+alias find='fd'
+alias cat='bat'
+
+[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+eval "$(pyenv init -)"
