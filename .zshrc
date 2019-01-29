@@ -1,5 +1,4 @@
-# Path to your oh-my-zsh installation.
-export ZSH="/Users/francoiscampbell/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 ZSH_THEME="agnoster"
 
@@ -9,8 +8,6 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
-
-# User configuration
 
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
@@ -47,8 +44,35 @@ rprompt_dir () {
 autoload -U add-zsh-hook
 add-zsh-hook precmd rprompt_dir
 
-export YVM_DIR=/Users/francoiscampbell/.yvm
-[ -r $YVM_DIR/yvm.sh ] && source $YVM_DIR/yvm.sh
+
+
+# App loading
+
+export NVM_DIR="$HOME/.nvm"
+nvm() {  # Defer loading NVM
+  unset nvm
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+  nvm "$@"
+}
+
+export YVM_DIR="$HOME/.yvm"
+yvm() {  # Defer loading YVM
+  unset yvm
+  [ -r $YVM_DIR/yvm.sh ] && source $YVM_DIR/yvm.sh
+  yvm "$@"
+}
+
+export PATH="$HOME/.cargo/bin:$PATH"
+
+[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+eval "$(pyenv init -)"
+
+
+
+# Functions and aliases
 
 mkvar() {
   if [ ! -e Makefile ]; then
@@ -61,14 +85,9 @@ mkvar() {
   fi
 }
 
-alias gbc="git remote prune origin && (git branch -vv | grep 'origin/.*: gone]' | awk '{print $1}' | xargs git branch -D)"
-
 alias ls='exa'
 alias l='exa -la'
 alias find='fd'
 alias cat='bat'
 
-[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-eval "$(pyenv init -)"
+alias gbc="git remote prune origin && (git branch -vv | grep 'origin/.*: gone]' | awk '{print $1}' | xargs git branch -D)"
