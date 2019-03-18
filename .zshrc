@@ -20,7 +20,7 @@ prompt_context() {
 }
 
 prompt_dir () {
-    prompt_segment blue black '$'
+    prompt_segment blue black "%?"
 }
 
 RSEGMENT_SEPARATOR="\ue0b2"
