@@ -11,9 +11,8 @@ source $ZSH/oh-my-zsh.sh
 
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-source ~/.bash_profile
-
-alias sz='subl ~/.zshrc'
+alias sz='subl ~/.zshrc ~/.private.zshrc'
+alias ssz='source ~/.zshrc'
 
 prompt_context() {
   
@@ -63,12 +62,39 @@ yvm() {  # Defer loading YVM
   yvm "$@"
 }
 
+export PATH=$HOME/.rbenv/shims:$PATH
+rbenv() {
+  unset rbenv 
+  eval "$(/usr/local/bin/rbenv init -)"
+  rbenv "$@"
+}
+
+export PATH="$HOME/.rvm/bin:$PATH"
+rvm() {
+  unset rvm
+  [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+  rvm "$@"
+}
+
+export PATH=$HOME/.pyenv/shims:$PATH
+pyenv() {
+  unset pyenv
+  eval "$(/usr/local/bin/pyenv init -)"
+  pyenv "$@"
+}
+
 export PATH="$HOME/.cargo/bin:$PATH"
 
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-eval "$(pyenv init -)"
+# From https://github.com/jiansoung/issues-list/issues/13
+# For compilers to find zlib you may need to set:
+export LDFLAGS="${LDFLAGS} -L/usr/local/opt/zlib/lib -L/usr/local/opt/sqlite/lib"
+export CPPFLAGS="${CPPFLAGS} -I/usr/local/opt/zlib/include -I/usr/local/opt/sqlite/include"
+
+# For pkg-config to find zlib you may need to set:
+export PKG_CONFIG_PATH="${PKG_CONFIG_PATH} /usr/local/opt/zlib/lib/pkgconfig"
 
 
 
@@ -87,7 +113,34 @@ mkvar() {
 
 alias ls='exa'
 alias l='exa -la'
-alias find='fd'
 alias cat='bat'
+alias doco='docker-compose'
+
+alias vv='. .venv/bin/activate'
+alias vv3='. .venv3/bin/activate'
 
 alias gbc="git remote prune origin && (git branch -vv | grep 'origin/.*: gone]' | awk '{print $1}' | xargs git branch -D)"
+
+gcopr() {
+  git fetch origin pull/$1/head:pull/$1 && git checkout pull/$1
+}
+gcap() {
+  git commit -am "$1" && git push
+}
+
+crhtml() {
+  FILE="/tmp/crhtml-${RANDOM}.html"
+  >${FILE}
+  open ${FILE}
+}
+
+darken_slack() {
+    curl -o /tmp/ssb-interop.js.zip http://neckcode.com/slack/ssb-interop.js.zip
+    unzip -p /tmp/ssb-interop.js.zip ssb-interop.js > /Applications/Slack.app/Contents/Resources/app.asar.unpacked/src/static/ssb-interop.js
+}
+
+
+
+# Include private stuff
+
+[ -f ~/.private.zshrc ] && source ~/.private.zshrc
