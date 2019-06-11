@@ -5,6 +5,7 @@ ZSH_THEME="agnoster"
 plugins=(
   git
   docker
+  aws
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -69,13 +70,6 @@ rbenv() {
   rbenv "$@"
 }
 
-export PATH="$HOME/.rvm/bin:$PATH"
-rvm() {
-  unset rvm
-  [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
-  rvm "$@"
-}
-
 export PATH=$HOME/.pyenv/shims:$PATH
 pyenv() {
   unset pyenv
@@ -114,10 +108,18 @@ mkvar() {
 alias ls='exa'
 alias l='exa -la'
 alias cat='bat'
-alias doco='docker-compose'
 
+alias doco='docker-compose'
 alias vv='. .venv/bin/activate'
 alias vv3='. .venv3/bin/activate'
+alias ma='$(make activate)'
+alias ip='ipython'
+alias ip2='ipython2'
+alias ip3='ipython3'
+
+alias tf='terraform'
+alias tfp='terraform plan'
+alias tfa='terraform apply'
 
 alias gbc="git remote prune origin && (git branch -vv | grep 'origin/.*: gone]' | awk '{print $1}' | xargs git branch -D)"
 
