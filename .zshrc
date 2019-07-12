@@ -79,6 +79,8 @@ pyenv() {
 
 export PATH="$HOME/.cargo/bin:$PATH"
 
+export GROOVY_HOME=/usr/local/opt/groovy/libexec
+
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -110,6 +112,8 @@ alias l='exa -la'
 alias cat='bat'
 
 alias doco='docker-compose'
+alias drb='docker run --rm -it --entrypoint bash'
+
 alias vv='. .venv/bin/activate'
 alias vv3='. .venv3/bin/activate'
 alias ma='$(make activate)'
@@ -118,13 +122,20 @@ alias ip2='ipython2'
 alias ip3='ipython3'
 
 alias tf='terraform'
-alias tfp='terraform plan'
-alias tfa='terraform apply'
+alias tfi='tf init'
+alias tfp='tf plan'
+alias tfpp='tf plan -var-file=terraform.prod.tfvars'
+alias tfps='tf plan -var-file=terraform.staging.tfvars'
+alias tfpd='tf plan -var-file=terraform.dev.tfvars'
+alias tfa='tf apply'
+alias tfap='tf apply -var-file=terraform.prod.tfvars'
+alias tfas='tf apply -var-file=terraform.staging.tfvars'
+alias tfad='tf apply -var-file=terraform.dev.tfvars'
 
 alias gbc="git remote prune origin && (git branch -vv | grep 'origin/.*: gone]' | awk '{print $1}' | xargs git branch -D)"
-
+alias grp="git rev-parse"
 gcopr() {
-  git fetch origin pull/$1/head:pull/$1 && git checkout pull/$1
+  git fetch origin pull/$1/head && git checkout FETCH_HEAD
 }
 gcap() {
   git commit -am "$1" && git push
@@ -137,8 +148,10 @@ crhtml() {
 }
 
 darken_slack() {
-    curl -o /tmp/ssb-interop.js.zip http://neckcode.com/slack/ssb-interop.js.zip
-    unzip -p /tmp/ssb-interop.js.zip ssb-interop.js > /Applications/Slack.app/Contents/Resources/app.asar.unpacked/src/static/ssb-interop.js
+  killall Slack
+  curl -o /tmp/ssb-interop.js.zip http://neckcode.com/slack/ssb-interop.js.zip
+  unzip -p /tmp/ssb-interop.js.zip ssb-interop.js > /Applications/Slack.app/Contents/Resources/app.asar.unpacked/src/static/ssb-interop.js
+  open "/Applications/Slack.app"
 }
 
 
