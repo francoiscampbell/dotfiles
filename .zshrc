@@ -113,6 +113,9 @@ alias cat='bat'
 
 alias doco='docker-compose'
 alias drb='docker run --rm -it --entrypoint bash'
+deb() {
+  docker exec -it $1 bash
+}
 
 alias vv='. .venv/bin/activate'
 alias vv3='. .venv3/bin/activate'
@@ -134,6 +137,7 @@ alias tfad='tf apply -var-file=terraform.dev.tfvars'
 
 alias gbc="git remote prune origin && (git branch -vv | grep 'origin/.*: gone]' | awk '{print $1}' | xargs git branch -D)"
 alias grp="git rev-parse"
+alias gfom="git fetch origin master"
 gcopr() {
   git fetch origin pull/$1/head && git checkout FETCH_HEAD
 }
