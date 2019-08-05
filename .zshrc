@@ -77,12 +77,7 @@ pyenv() {
   pyenv "$@"
 }
 
-export PATH="$HOME/.cargo/bin:$PATH"
-
-export GROOVY_HOME=/usr/local/opt/groovy/libexec
-
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # From https://github.com/jiansoung/issues-list/issues/13
 # For compilers to find zlib you may need to set:
@@ -121,6 +116,7 @@ deb() {
 alias vv='. .venv/bin/activate'
 alias vv3='. .venv3/bin/activate'
 alias ma='$(make activate)'
+
 alias ip='ipython'
 alias ip2='ipython2'
 alias ip3='ipython3'
@@ -151,15 +147,6 @@ crhtml() {
   >${FILE}
   open ${FILE}
 }
-
-darken_slack() {
-  killall Slack
-  curl -o /tmp/ssb-interop.js.zip http://neckcode.com/slack/ssb-interop.js.zip
-  unzip -p /tmp/ssb-interop.js.zip ssb-interop.js > /Applications/Slack.app/Contents/Resources/app.asar.unpacked/src/static/ssb-interop.js
-  open "/Applications/Slack.app"
-}
-
-
 
 # Include private stuff
 
