@@ -95,6 +95,7 @@ export PKG_CONFIG_PATH="${PKG_CONFIG_PATH} /usr/local/opt/zlib/lib/pkgconfig"
 
 
 # Functions and aliases
+alias .f='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'  # https://medium.com/toutsbrasil/how-to-manage-your-dotfiles-with-git-f7aeed8adf8b
 
 mkvar() {
   if [ ! -e Makefile ]; then
