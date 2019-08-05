@@ -7,7 +7,10 @@ Credit to https://medium.com/toutsbrasil/how-to-manage-your-dotfiles-with-git-f7
 git clone --bare https://github.com/francoiscampbell/dotfiles.git $HOME/.dotfiles
 git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME checkout  # add -f to ignore local dotfiles changes
 ```
-Re-source shell configs as necessary. This will also define the `.f` alias as `git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME`
+Re-source shell configs as necessary. This will also define the `.f` alias as 
+```bash
+alias .f='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME`'
+```
  
 ## Committing changes
 ```bash
