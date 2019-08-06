@@ -116,6 +116,7 @@ deb() {
 alias vv='. .venv/bin/activate'
 alias vv3='. .venv3/bin/activate'
 alias ma='$(make activate)'
+alias v='. $(basename $PWD).venv/bin/activate'
 
 alias ip='ipython'
 alias ip2='ipython2'
