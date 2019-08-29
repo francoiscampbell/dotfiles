@@ -16,7 +16,7 @@ alias sz='subl ~/.zshrc ~/.private.zshrc'
 alias ssz='source ~/.zshrc'
 
 prompt_context() {
-  
+
 }
 
 prompt_dir () {
@@ -65,7 +65,7 @@ yvm() {  # Defer loading YVM
 
 export PATH=$HOME/.rbenv/shims:$PATH
 rbenv() {
-  unset rbenv 
+  unset rbenv
   eval "$(/usr/local/bin/rbenv init -)"
   rbenv "$@"
 }
@@ -136,6 +136,7 @@ alias tfad='tf apply -var-file=terraform.dev.tfvars'
 
 alias gbc="git remote prune origin && (git branch -vv | grep 'origin/.*: gone]' | awk '{print $1}' | xargs git branch -D)"
 alias grp="git rev-parse"
+alias grph="git rev-parse HEAD"
 alias gfom="git fetch origin master"
 alias gclm="git checkout master && git pull"
 gcopr() {
