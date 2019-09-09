@@ -103,6 +103,10 @@ mkvar() {
   fi
 }
 
+mkcd() {
+  mkdir -p $1 && cd $1
+}
+
 alias ls='exa'
 alias l='exa -la'
 alias cat='bat'
