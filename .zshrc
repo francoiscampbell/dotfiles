@@ -92,17 +92,6 @@ export PKG_CONFIG_PATH="${PKG_CONFIG_PATH} /usr/local/opt/zlib/lib/pkgconfig"
 # Functions and aliases
 alias .f='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'  # https://medium.com/toutsbrasil/how-to-manage-your-dotfiles-with-git-f7aeed8adf8b
 
-mkvar() {
-  if [ ! -e Makefile ]; then
-    (echo 'Run this in a directory with a Makefile'; exit 1)
-  else
-    echo 'print-%:; @echo $($*)' >> Makefile
-    make print-$1
-    sed -i .tmp '$d' Makefile
-    rm Makefile.tmp
-  fi
-}
-
 mkcd() {
   mkdir -p $1 && cd $1
 }
@@ -122,6 +111,7 @@ alias vv='. .venv/bin/activate'
 alias vv3='. .venv3/bin/activate'
 alias ma='$(make activate)'
 alias v='. $(basename $PWD).venv/bin/activate'
+alias sb='. script/bootstrap'
 
 alias ip='ipython'
 alias ip2='ipython2'
