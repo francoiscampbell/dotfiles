@@ -139,6 +139,14 @@ gcopr() {
 gcap() {
   git commit -am "$1" && git push
 }
+gh() {
+  repo="$(git config --get remote.origin.url | sed 's/git@github.com:/https:\/\/github.com\//')"
+  branch="$(git rev-parse --abbrev-ref head)"
+  if [[ -z "$repo" || -z "$branch" ]]; then
+    return 1
+  fi
+  open "${repo}/compare/${branch}"
+}
 
 crhtml() {
   FILE="/tmp/crhtml-${RANDOM}.html"
