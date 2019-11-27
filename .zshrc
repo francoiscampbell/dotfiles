@@ -156,4 +156,4 @@ crhtml() {
 
 # Include private stuff
 
-[ -f ~/.private.zshrc ] && source ~/.private.zshrc
+[ -f ~/.private.zshrc ] && source ~/.private.zshrc || true
