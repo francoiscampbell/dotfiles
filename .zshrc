@@ -129,6 +129,7 @@ alias tfas='tf apply -var-file=terraform.staging.tfvars'
 alias tfad='tf apply -var-file=terraform.dev.tfvars'
 
 alias gbc="git remote prune origin && (git branch -vv | grep 'origin/.*: gone]' | awk '{print $1}' | xargs git branch -D)"
+alias grl="git reflog"
 alias grp="git rev-parse"
 alias grph="git rev-parse HEAD"
 alias gfom="git fetch origin master"
