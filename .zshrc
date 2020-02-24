@@ -134,6 +134,7 @@ alias grp="git rev-parse"
 alias grph="git rev-parse HEAD"
 alias gfom="git fetch origin master"
 alias gclm="git checkout master && git pull"
+alias groot="cd $(git rev-parse --show-toplevel)"
 gcopr() {
   git fetch origin pull/$1/head && git checkout FETCH_HEAD
 }
