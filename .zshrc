@@ -133,6 +133,7 @@ alias grl="git reflog"
 alias grp="git rev-parse"
 alias grph="git rev-parse HEAD"
 alias gfom="git fetch origin master"
+alias gmom="git merge --no-edit origin/master"
 alias gclm="git checkout master && git pull"
 groot() {
   cd $(git rev-parse --show-toplevel)
