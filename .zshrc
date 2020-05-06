@@ -155,6 +155,11 @@ gh() {
   fi
   open "${repo}/compare/${branch}"
 }
+grom() {
+  gcm
+  grhh origin/master
+  gco -
+}
 
 crhtml() {
   FILE="/tmp/crhtml-${RANDOM}.html"
