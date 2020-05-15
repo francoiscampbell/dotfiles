@@ -137,7 +137,7 @@ alias grp="git rev-parse"
 alias grph="git rev-parse HEAD"
 alias gfom="git fetch origin master"
 alias gmom="git merge --no-edit origin/master"
-alias gclm="git checkout master && git pull"
+alias gclm="git fetch origin +refs/heads/master:refs/remotes/origin/master && git checkout -B master origin/master"
 groot() {
   cd $(git rev-parse --show-toplevel)
 }
