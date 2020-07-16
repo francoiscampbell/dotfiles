@@ -148,7 +148,7 @@ gcap() {
   git commit -am "$1" && git push
 }
 gh() {
-  repo="$(git config --get remote.origin.url | sed 's/git@github.com:/https:\/\/github.com\//')"
+  repo="$(git config --get remote.origin.url | sed 's/git@github.com:/https:\/\/github.com\//' | sed 's/.git$//')"
   branch="$(git rev-parse --abbrev-ref head)"
   if [[ -z "$repo" || -z "$branch" ]]; then
     return 1
