@@ -77,6 +77,8 @@ pyenv() {
   pyenv "$@"
 }
 
+export PATH="/usr/local/opt/openjdk/bin:$PATH"
+
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 
 # From https://github.com/jiansoung/issues-list/issues/13
@@ -135,6 +137,7 @@ alias gbc="git remote prune origin && (git branch -vv | grep 'origin/.*: gone]' 
 alias grl="git reflog"
 alias grp="git rev-parse"
 alias grph="git rev-parse HEAD"
+alias grpb="git rev-parse --abbrev-ref HEAD"
 alias gfom="git fetch origin master"
 alias gmom="git merge --no-edit origin/master"
 alias gclm="git fetch origin +refs/heads/master:refs/remotes/origin/master && git checkout -B master origin/master"
