@@ -89,6 +89,10 @@ export CPPFLAGS="${CPPFLAGS} -I/usr/local/opt/zlib/include -I/usr/local/opt/sqli
 # For pkg-config to find zlib you may need to set:
 export PKG_CONFIG_PATH="${PKG_CONFIG_PATH} /usr/local/opt/zlib/lib/pkgconfig"
 
+export GOPATH=/Users/francoiscampbell/go
+export PATH="$GOPATH/bin:$PATH"
+
+export PATH="/Users/francoiscampbell/.cargo/bin:$PATH"
 
 
 # Functions and aliases
@@ -163,6 +167,10 @@ grom() {
   grhh origin/master
   gco -
 }
+gskip() {
+  gc --allow-empty -m '[skip ci]'
+  gpf
+}
 
 crhtml() {
   FILE="/tmp/crhtml-${RANDOM}.html"
@@ -173,3 +181,11 @@ crhtml() {
 # Include private stuff
 
 [ -f ~/.private.zshrc ] && source ~/.private.zshrc || true
+
+
+### BEGIN--Instacart Shell Settings. (Updated: Tue 15 Sep 2020 13:57:36 EDT. [Script Version 1.2.6])
+# This Line Added Automatically by Instacart Setup Script
+# The sourced file contains all of the instacart utilities and shell settings
+# To remove this functionality, leave the block, and enter "NO-TOUCH" in the BEGIN line, and comment the line below:
+source /Users/francoiscampbell/.instacart_shell_profile
+### END--Instacart Shell Settings.
