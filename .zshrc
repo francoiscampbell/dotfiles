@@ -113,15 +113,15 @@ deb() {
   docker exec -it $1 bash
 }
 
-alias vv='. .venv/bin/activate'
-alias vv3='. .venv3/bin/activate'
-alias ma='$(make activate)'
-alias v='. $(basename $PWD).venv/bin/activate'
-alias sb='. script/bootstrap'
-
+alias py='python'
 alias ip='ipython'
-alias ip2='ipython2'
-alias ip3='ipython3'
+
+alias mkv='py -m venv $(basename $PWD).venv'
+alias v='. $(basename $PWD).venv/bin/activate'
+alias mkvv='py -m venv .venv'
+alias vv='. .venv/bin/activate'
+
+alias sb='. script/bootstrap'
 
 alias tf='terraform'
 alias tfi='tf init'
@@ -189,3 +189,6 @@ crhtml() {
 # To remove this functionality, leave the block, and enter "NO-TOUCH" in the BEGIN line, and comment the line below:
 source /Users/francoiscampbell/.instacart_shell_profile
 ### END--Instacart Shell Settings.
+
+export YVM_DIR=/Users/francoiscampbell/.yvm
+[ -r $YVM_DIR/yvm.sh ] && . $YVM_DIR/yvm.sh
