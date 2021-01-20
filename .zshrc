@@ -137,7 +137,7 @@ alias tfip='tf import -var-file=terraform.prod.tfvars'
 alias tfis='tf import -var-file=terraform.staging.tfvars'
 alias tfid='tf import -var-file=terraform.dev.tfvars'
 
-alias gbc="git remote prune origin && (git branch -vv | grep 'origin/.*: gone]' | awk '{print $1}' | xargs git branch -D)"
+alias gbc="git remote prune origin && (git branch -vv | grep '\[origin/.*: gone\]' | awk '{print \$1}' | xargs git branch -D)"
 alias grl="git reflog"
 alias grp="git rev-parse"
 alias grph="git rev-parse HEAD"
