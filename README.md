@@ -9,7 +9,7 @@ git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME checkout  # add -f to ignore lo
 ```
 Re-source shell configs as necessary. This will also define the `.f` alias as 
 ```bash
-alias .f='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME`'
+alias .f='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 ```
  
 ## Committing changes
