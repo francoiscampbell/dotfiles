@@ -186,3 +186,5 @@ source /Users/francoiscampbell/.instacart_shell_profile
 
 export YVM_DIR=/Users/francoiscampbell/.yvm
 [ -r $YVM_DIR/yvm.sh ] && . $YVM_DIR/yvm.sh
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
