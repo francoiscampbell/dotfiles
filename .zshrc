@@ -138,17 +138,16 @@ alias tfip='tf import -var-file=terraform.prod.tfvars'
 alias tfis='tf import -var-file=terraform.staging.tfvars'
 alias tfid='tf import -var-file=terraform.dev.tfvars'
 
-alias gmb="git_main_branch"
 alias grl="git reflog"
 alias grp="git rev-parse"
 alias grph="grp HEAD"
 alias grpb="grp --abbrev-ref HEAD"
-alias gfom="gfo $(gmb)"
-alias gmom="git merge --no-edit origin/$(gmb)"
-alias gclm="gfom && gco -B $(gmb) origin/$(gmb)"
+alias gfom="gfo $(git_main_branch)"
+alias gmom="git merge --no-edit origin/$(git_main_branch)"
+alias gclm="gfom && gco -B $(git_main_branch) origin/$(git_main_branch)"
 alias groot="cd $(grp --show-toplevel)"
-alias grom="gcm && grhh origin/$(gmb) && gco -"
-alias grbom="grom && grb origin/$(gmb)"
+alias grom="gcm && grhh origin/$(git_main_branch) && gco -"
+alias grbom="grom && grb origin/$(git_main_branch)"
 alias gskip="gc --allow-empty -m '[skip ci]' && gpf"
 
 gbc() {
