@@ -47,6 +47,7 @@ add-zsh-hook precmd rprompt_dir
 
 
 # App loading
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export NVM_DIR="$HOME/.nvm"
 nvm() {  # Defer loading NVM
@@ -64,14 +65,14 @@ yvm() {  # Defer loading YVM
 }
 
 export PATH=$HOME/.rbenv/shims:$PATH
-rbenv() {
+rbenv() {  # Defer loading rbenv
   unset rbenv
   eval "$(/usr/local/bin/rbenv init -)"
   rbenv "$@"
 }
 
 export PATH=$HOME/.pyenv/shims:$PATH
-pyenv() {
+pyenv() {  # Defer loading pyenv
   unset pyenv
   eval "$(/usr/local/bin/pyenv init -)"
   pyenv "$@"
@@ -137,37 +138,31 @@ alias tfip='tf import -var-file=terraform.prod.tfvars'
 alias tfis='tf import -var-file=terraform.staging.tfvars'
 alias tfid='tf import -var-file=terraform.dev.tfvars'
 
-gbc() {
-  git remote prune origin && (git branch -vv | grep '\[origin/.*: gone\]' | awk '{print $1}' | xargs git branch -D)
-}
+alias gmb="git_main_branch"
 alias grl="git reflog"
 alias grp="git rev-parse"
-alias grph="git rev-parse HEAD"
-alias grpb="git rev-parse --abbrev-ref HEAD"
-alias gfom="git fetch origin master"
-alias gmom="git merge --no-edit origin/master"
-alias gclm="git fetch origin +refs/heads/master:refs/remotes/origin/master && git checkout -B master origin/master"
-groot() {
-  cd $(git rev-parse --show-toplevel)
+alias grph="grp HEAD"
+alias grpb="grp --abbrev-ref HEAD"
+alias gfom="gfo $(gmb)"
+alias gmom="git merge --no-edit origin/$(gmb)"
+alias gclm="gfom && gco -B $(gmb) origin/$(gmb)"
+alias groot="cd $(grp --show-toplevel)"
+alias grom="gcm && grhh origin/$(gmb) && gco -"
+alias grbom="grom && grb origin/$(gmb)"
+alias gskip="gc --allow-empty -m '[skip ci]' && gpf"
+
+gbc() {
+  gr prune origin && (gb -vv | grep '\[origin/.*: gone\]' | awk '{print $1}' | xargs git branch -D)
 }
 gcopr() {
-  git fetch origin pull/$1/head && git checkout FETCH_HEAD
+  gfo pull/$1/head && git checkout FETCH_HEAD
 }
 gcap() {
-  git commit -am "$1" && git push
-}
-grom() {
-  gcm
-  grhh origin/master
-  gco -
-}
-gskip() {
-  gc --allow-empty -m '[skip ci]'
-  gpf
+  gc -am "$1" && gp
 }
 
 crhtml() {
-  FILE="/tmp/crhtml-${RANDOM}.html"
+  FILE="$(mktemp).html"
   >${FILE}
   open ${FILE}
 }
@@ -183,8 +178,3 @@ crhtml() {
 # To remove this functionality, leave the block, and enter "NO-TOUCH" in the BEGIN line, and comment the line below:
 source /Users/francoiscampbell/.instacart_shell_profile
 ### END--Instacart Shell Settings.
-
-export YVM_DIR=/Users/francoiscampbell/.yvm
-[ -r $YVM_DIR/yvm.sh ] && . $YVM_DIR/yvm.sh
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
