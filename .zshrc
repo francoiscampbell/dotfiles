@@ -142,12 +142,12 @@ alias grl="git reflog"
 alias grp="git rev-parse"
 alias grph="grp HEAD"
 alias grpb="grp --abbrev-ref HEAD"
-alias gfom="gfo $(git_main_branch)"
-alias gmom="git merge --no-edit origin/$(git_main_branch)"
-alias gclm="gfom && gco -B $(git_main_branch) origin/$(git_main_branch)"
-alias groot="cd $(grp --show-toplevel)"
-alias grom="gcm && grhh origin/$(git_main_branch) && gco -"
-alias grbom="grom && grb origin/$(git_main_branch)"
+alias gfom="gfo \$(git_main_branch)"
+alias gmom="git merge --no-edit origin/\$(git_main_branch)"
+alias gclm="gfom && gco -B \$(git_main_branch) origin/\$(git_main_branch)"
+alias groot="cd \$(grp --show-toplevel)"
+alias grom="gcm && grhh origin/\$(git_main_branch) && gco -"
+alias grbom="grom && grb origin/\$(git_main_branch)"
 alias gskip="gc --allow-empty -m '[skip ci]' && gpf"
 
 gbc() {
@@ -159,6 +159,7 @@ gcopr() {
 gcap() {
   gc -am "$1" && gp
 }
+
 
 crhtml() {
   FILE="$(mktemp).html"
