@@ -124,7 +124,6 @@ alias vv='. .venv/bin/activate'
 
 alias sb='. script/bootstrap'
 
-alias tf='terraform'
 alias tfi='tf init'
 alias tfp='tf plan'
 alias tfpp='tf plan -var-file=terraform.prod.tfvars'
