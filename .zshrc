@@ -146,7 +146,7 @@ alias gmom="git merge --no-edit origin/\$(git_main_branch)"
 alias gclm="gfom && gco -B \$(git_main_branch) origin/\$(git_main_branch)"
 alias groot="cd \$(grp --show-toplevel)"
 alias grom="gcm && grhh origin/\$(git_main_branch) && gco -"
-alias grbom="grom && grb origin/\$(git_main_branch)"
+alias grbom="gfom && grb origin/\$(git_main_branch)"
 alias grpo="git remote prune origin"
 alias gskip="gc --allow-empty -m '[skip ci]' && gpf"
 
