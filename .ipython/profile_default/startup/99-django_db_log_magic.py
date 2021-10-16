@@ -17,5 +17,5 @@ def djlog(line):
         django_db_logger.setLevel(logging.NOTSET)
         django_db_logger.removeHandler(handler)
     else:
-        raise AttributeError(f"Invalid choice: {line}")
+        raise AttributeError("Invalid choice: {line}".format(line=line))
 
