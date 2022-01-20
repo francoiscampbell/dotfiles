@@ -170,11 +170,3 @@ crhtml() {
 # Include private stuff
 
 [ -f ~/.private.zshrc ] && source ~/.private.zshrc || true
-
-
-### BEGIN--Instacart Shell Settings. (Updated: Tue 15 Sep 2020 13:57:36 EDT. [Script Version 1.2.6])
-# This Line Added Automatically by Instacart Setup Script
-# The sourced file contains all of the instacart utilities and shell settings
-# To remove this functionality, leave the block, and enter "NO-TOUCH" in the BEGIN line, and comment the line below:
-source /Users/francoiscampbell/.instacart_shell_profile
-### END--Instacart Shell Settings.
