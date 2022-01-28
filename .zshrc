@@ -1,3 +1,7 @@
+GITHUB_USERNAME='francoiscampbell'
+
+BREW_PREFIX=$(brew --prefix)
+
 export ZSH="$HOME/.oh-my-zsh"
 
 ZSH_THEME="agnoster"
@@ -10,7 +14,7 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $BREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 alias sz='subl ~/.zshrc ~/.private.zshrc'
 alias ssz='source ~/.zshrc'
@@ -67,28 +71,28 @@ yvm() {  # Defer loading YVM
 export PATH=$HOME/.rbenv/shims:$PATH
 rbenv() {  # Defer loading rbenv
   unset rbenv
-  eval "$(/usr/local/bin/rbenv init -)"
+  eval "$($BREW_PREFIX/bin/rbenv init -)"
   rbenv "$@"
 }
 
 export PATH=$HOME/.pyenv/shims:$PATH
 pyenv() {  # Defer loading pyenv
   unset pyenv
-  eval "$(/usr/local/bin/pyenv init -)"
+  eval "$($BREW_PREFIX/bin/pyenv init -)"
   pyenv "$@"
 }
 
-export PATH="/usr/local/opt/openjdk/bin:$PATH"
+export PATH="$BREW_PREFIX/opt/openjdk/bin:$PATH"
 
-[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
+[ -f $BREW_PREFIX/etc/profile.d/autojump.sh ] && . $BREW_PREFIX/etc/profile.d/autojump.sh
 
 # From https://github.com/jiansoung/issues-list/issues/13
 # For compilers to find zlib you may need to set:
-export LDFLAGS="${LDFLAGS} -L/usr/local/opt/zlib/lib -L/usr/local/opt/sqlite/lib -L/usr/local/opt/openssl/lib -L/usr/local/opt/libffi/lib"
-export CPPFLAGS="${CPPFLAGS} -I/usr/local/opt/zlib/include -I/usr/local/opt/sqlite/include -I/usr/local/opt/libffi/include"
+export LDFLAGS="${LDFLAGS} -L$BREW_PREFIX/opt/zlib/lib -L$BREW_PREFIX/opt/sqlite/lib -L$BREW_PREFIX/opt/openssl/lib -L$BREW_PREFIX/opt/libffi/lib"
+export CPPFLAGS="${CPPFLAGS} -I$BREW_PREFIX/opt/zlib/include -I$BREW_PREFIX/opt/sqlite/include -I$BREW_PREFIX/opt/openssl/include -I$BREW_PREFIX/opt/libffi/include"
 
 # For pkg-config to find zlib you may need to set:
-export PKG_CONFIG_PATH="${PKG_CONFIG_PATH} /usr/local/opt/zlib/lib/pkgconfig"
+export PKG_CONFIG_PATH="${PKG_CONFIG_PATH} $BREW_PREFIX/opt/zlib/lib/pkgconfig"
 
 export GOPATH=/Users/francoiscampbell/go
 export PATH="$GOPATH/bin:$PATH"
