@@ -153,6 +153,8 @@ alias grom="gcm && grhh origin/\$(git_main_branch) && gco -"
 alias grbom="gfom && grb origin/\$(git_main_branch)"
 alias grpo="git remote prune origin"
 alias gskip="gc --allow-empty -m '[skip ci]' && gpf"
+alias cb="grpb | pbcopy"
+alias ch="grph | pbcopy"
 
 gbc() {
   gr prune origin && (gb -vv | grep '\[origin/.*: gone\]' | awk '{print $1}' | xargs git branch -D)
