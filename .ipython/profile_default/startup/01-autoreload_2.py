@@ -1,1 +1,1 @@
-get_ipython().magic('autoreload 2')
+get_ipython().run_line_magic('autoreload', '2')
