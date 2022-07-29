@@ -48,7 +48,7 @@ rprompt_dir () {
 autoload -U add-zsh-hook
 add-zsh-hook precmd rprompt_dir
 
-
+ssh-add > /dev/null # add SSH keys to agent
 
 # App loading
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -98,6 +98,7 @@ export GOPATH=/Users/francoiscampbell/go
 export PATH="$GOPATH/bin:$PATH"
 
 export PATH="/Users/francoiscampbell/.cargo/bin:$PATH"
+export PATH="/Users/francoiscampbell/bin:$PATH"
 
 
 # Functions and aliases
@@ -153,6 +154,7 @@ alias gcld="gfod && gco -B dev origin/dev"
 alias groot="cd \$(grp --show-toplevel)"
 alias grom="gcm && grhh origin/\$(git_main_branch) && gco -"
 alias grbom="gfom && grb origin/\$(git_main_branch)"
+alias grbomi="gfom && grb origin/\$(git_main_branch) -i"
 alias grpo="git remote prune origin"
 alias gskip="gc --allow-empty -m '[skip ci]' && gpf"
 alias cb="grpb | pbcopy"
@@ -178,3 +180,5 @@ crhtml() {
 # Include private stuff
 
 [ -f ~/.private.zshrc ] && source ~/.private.zshrc || true
+
+export PATH="$HOME/.poetry/bin:$PATH"
