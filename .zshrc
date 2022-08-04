@@ -48,7 +48,7 @@ rprompt_dir () {
 autoload -U add-zsh-hook
 add-zsh-hook precmd rprompt_dir
 
-ssh-add > /dev/null # add SSH keys to agent
+ssh-add 2> /dev/null # add SSH keys to agent
 
 # App loading
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
