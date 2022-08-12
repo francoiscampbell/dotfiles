@@ -1,3 +1,5 @@
+export BASH_SILENCE_DEPRECATION_WARNING=1  # allow using bash without it yelling at you
+
 GITHUB_USERNAME='francoiscampbell'
 
 BREW_PREFIX=$(brew --prefix)
