@@ -117,6 +117,7 @@ alias rg='rg --hidden'
 
 alias doco='docker-compose'
 alias drb='docker run --rm -it --entrypoint bash'
+alias dmi='docker manifest inspect'
 deb() {
   docker exec -it $1 bash
 }
