@@ -162,6 +162,8 @@ alias grpo="git remote prune origin"
 alias gskip="gc --allow-empty -m '[skip ci]' && gpf"
 alias cb="grpb | pbcopy"
 alias ch="grph | pbcopy"
+alias gmb="git merge-base"
+alias gmbm="git merge-base \$(git_main_branch) HEAD"
 
 gbc() {
   gr prune origin && (gb -vv | grep '\[origin/.*: gone\]' | awk '{print $1}' | xargs git branch -D)
