@@ -165,6 +165,10 @@ alias ch="grph | pbcopy"
 alias gmb="git merge-base"
 alias gmbm="git merge-base \$(git_main_branch) HEAD"
 
+alias k="kubectl"
+alias kg='kubectl get'
+alias kd='kubectl describe'
+
 gbc() {
   gr prune origin && (gb -vv | grep '\[origin/.*: gone\]' | awk '{print $1}' | xargs git branch -D)
 }
