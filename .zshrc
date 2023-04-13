@@ -168,6 +168,9 @@ alias gmbm="git merge-base \$(git_main_branch) HEAD"
 alias k="kubectl"
 alias kg='kubectl get'
 alias kd='kubectl describe'
+alias tlr='tsh login --request-id'
+
+alias safe-term='aws --no-paginate autoscaling terminate-instance-in-auto-scaling-group --no-should-decrement-desired-capacity --instance-id'
 
 gbc() {
   gr prune origin && (gb -vv | grep '\[origin/.*: gone\]' | awk '{print $1}' | xargs git branch -D)
@@ -190,4 +193,4 @@ crhtml() {
 
 [ -f ~/.private.zshrc ] && source ~/.private.zshrc || true
 
-export PATH="$HOME/.poetry/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
