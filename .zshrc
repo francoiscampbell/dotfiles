@@ -117,6 +117,7 @@ alias rg='rg --hidden'
 
 alias doco='docker-compose'
 alias drb='docker run --rm -it --entrypoint bash'
+alias drbv='docker run --rm -it --entrypoint bash -v "$PWD:/pwd" --workdir=/pwd'
 alias dmi='docker manifest inspect'
 deb() {
   docker exec -it $1 bash
@@ -137,13 +138,16 @@ alias tfp='tf plan'
 alias tfpp='tf plan -var-file=terraform.prod.tfvars'
 alias tfps='tf plan -var-file=terraform.staging.tfvars'
 alias tfpd='tf plan -var-file=terraform.dev.tfvars'
+alias tfpss='tf plan -var-file=terraform.shared-services.tfvars'
 alias tfa='tf apply'
 alias tfap='tf apply -var-file=terraform.prod.tfvars'
 alias tfas='tf apply -var-file=terraform.staging.tfvars'
 alias tfad='tf apply -var-file=terraform.dev.tfvars'
+alias tfass='tf apply -var-file=terraform.shared-services.tfvars'
 alias tfip='tf import -var-file=terraform.prod.tfvars'
 alias tfis='tf import -var-file=terraform.staging.tfvars'
 alias tfid='tf import -var-file=terraform.dev.tfvars'
+alias tfiss='tf import -var-file=terraform.shared-services.tfvars'
 
 alias grl="git reflog"
 alias grp="git rev-parse"
@@ -170,7 +174,7 @@ alias kg='kubectl get'
 alias kd='kubectl describe'
 alias tlr='tsh login --request-id'
 
-alias safe-term='aws --no-paginate autoscaling terminate-instance-in-auto-scaling-group --no-should-decrement-desired-capacity --instance-id'
+alias safe-term='aws --no-cli-pager --no-paginate autoscaling terminate-instance-in-auto-scaling-group --no-should-decrement-desired-capacity --instance-id'
 
 gbc() {
   gr prune origin && (gb -vv | grep '\[origin/.*: gone\]' | awk '{print $1}' | xargs git branch -D)
