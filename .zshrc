@@ -175,6 +175,7 @@ alias kd='kubectl describe'
 alias tlr='tsh login --request-id'
 
 alias safe-term='aws --no-cli-pager autoscaling terminate-instance-in-auto-scaling-group --no-should-decrement-desired-capacity --instance-id'
+alias unsafe-term='aws --no-cli-pager autoscaling terminate-instance-in-auto-scaling-group --should-decrement-desired-capacity --instance-id'
 
 gbc() {
   gr prune origin && (gb -vv | grep '\[origin/.*: gone\]' | awk '{print $1}' | xargs git branch -D)
