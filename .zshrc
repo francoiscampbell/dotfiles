@@ -113,7 +113,6 @@ mkcd() {
 alias ls='exa'
 alias l='exa -la'
 alias cat='bat'
-alias rg='rg --hidden'
 
 alias doco='docker-compose'
 alias drb='docker run --rm -it --entrypoint bash'
