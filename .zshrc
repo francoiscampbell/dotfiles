@@ -101,6 +101,7 @@ export PATH="$GOPATH/bin:$PATH"
 
 export PATH="/Users/francoiscampbell/.cargo/bin:$PATH"
 export PATH="/Users/francoiscampbell/bin:$PATH"
+export PATH="/Applications/IntelliJ IDEA.app/Contents/MacOS:$PATH"
 
 
 # Functions and aliases
