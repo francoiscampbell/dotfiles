@@ -107,6 +107,10 @@ export PATH="/Applications/IntelliJ IDEA.app/Contents/MacOS:$PATH"
 # Functions and aliases
 alias .f='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'  # https://medium.com/toutsbrasil/how-to-manage-your-dotfiles-with-git-f7aeed8adf8b
 
+setx() {
+  (set -x; "$@")
+}
+
 mkcd() {
   mkdir -p $1 && cd $1
 }
@@ -196,6 +200,15 @@ crhtml() {
   FILE="$(mktemp).html"
   >${FILE}
   open ${FILE}
+}
+
+touuid() {
+  if [[ -z "$1" || "$1" = "-" ]]; then
+    CHARS="$(</dev/stdin)"
+  else
+    CHARS="$1"
+  fi
+  echo "${CHARS:0:8}-${CHARS:8:4}-${CHARS:12:4}-${CHARS:16:4}-${CHARS:20:12}"
 }
 
 # Include private stuff
