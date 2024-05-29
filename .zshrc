@@ -2,20 +2,18 @@ export BASH_SILENCE_DEPRECATION_WARNING=1  # allow using bash without it yelling
 
 GITHUB_USERNAME='francoiscampbell'
 
+export PATH="/opt/homebrew/bin:$PATH"
 BREW_PREFIX=$(brew --prefix)
 
 export ZSH="$HOME/.oh-my-zsh"
-
 ZSH_THEME="agnoster"
 
 plugins=(
   git
   docker
-  aws
 )
 
 source $ZSH/oh-my-zsh.sh
-
 source $BREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 alias sz='subl ~/.zshrc ~/.private.zshrc'
@@ -96,12 +94,12 @@ export CPPFLAGS="${CPPFLAGS} -I$BREW_PREFIX/opt/zlib/include -I$BREW_PREFIX/opt/
 # For pkg-config to find zlib you may need to set:
 export PKG_CONFIG_PATH="${PKG_CONFIG_PATH} $BREW_PREFIX/opt/zlib/lib/pkgconfig"
 
-export GOPATH=/Users/francoiscampbell/go
+export GOPATH="$HOME/go"
 export PATH="$GOPATH/bin:$PATH"
 
-export PATH="/Users/francoiscampbell/.cargo/bin:$PATH"
-export PATH="/Users/francoiscampbell/bin:$PATH"
-export PATH="/Applications/IntelliJ IDEA.app/Contents/MacOS:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/Applications/IntelliJ IDEA Ultimate.app/Contents/MacOS:$PATH"
 
 
 # Functions and aliases
@@ -115,8 +113,8 @@ mkcd() {
   mkdir -p $1 && cd $1
 }
 
-alias ls='exa'
-alias l='exa -la'
+alias ls='eza'
+alias l='eza -la --icons'
 alias cat='bat'
 
 alias doco='docker-compose'
