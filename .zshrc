@@ -51,7 +51,7 @@ add-zsh-hook precmd rprompt_dir
 ssh-add 2> /dev/null # add SSH keys to agent
 
 # App loading
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source <(fzf --zsh)
 
 export NVM_DIR="$HOME/.nvm"
 nvm() {  # Defer loading NVM
